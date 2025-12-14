@@ -6,3 +6,4 @@ isort==5.9.3
 mypy==0.931
 pytest==7.0.1
 Flask==3.0.3
+FastAPI==latest
