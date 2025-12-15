@@ -3,7 +3,7 @@ flake8==4.0.1
 flake8-bugbear==22.1.11
 flake8-pie==0.15.0
 isort==5.9.3
-mypy==0.931
+mypy==1.19
 pytest==7.0.1
 Flask==3.0.3
 FastAPI==0.115.5
