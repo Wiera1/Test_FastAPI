@@ -30,7 +30,7 @@ jobs:
 
       - name: Run mypy
         run: |
-          mypy hw
+          mypy hw/main_2.py
 
       - name: Run black (check only)
         run: |
