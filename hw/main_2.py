@@ -1,9 +1,21 @@
 from flask import Flask, jsonify, request, Blueprint, abort
 from flask_sqlalchemy import SQLAlchemy
+from typing import TYPE_CHECKING
 from datetime import datetime
 from sqlalchemy import UniqueConstraint
 
 db = SQLAlchemy()
+
+
+if TYPE_CHECKING:
+    from flask_sqlalchemy.model import Model
+else:
+    Model = db.Model
+
+
+class MyModel(Model):
+    id = db.Column(db.Integer, primary_key=True)
+
 
 class Client(db.Model):
     __tablename__ = 'client'
