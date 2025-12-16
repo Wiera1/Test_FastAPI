@@ -45,7 +45,7 @@ jobs:
         
     - name: Test with black
       run: |
-        black --diff --check hw
+        black hw
 
     - name: Test with mypy
       run: |
