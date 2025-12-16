@@ -1,12 +1,11 @@
 stages:
   - test
 
-before_script:
-  - pip install -r requirements.txt pytest mypy black>=24.0.0 isort flake8 flask flask-sqlalchemy
-
 mypy:
   image: python:3.10
   stage: test
+  before_script:
+    - pip install mypy flask flask-sqlalchemy
   script:
     - mypy hw/
   rules:
@@ -16,6 +15,8 @@ mypy:
 black:
   image: python:3.10
   stage: test
+  before_script:
+    - pip install "black>=24.0.0"
   script:
     - black --check --diff hw/
   rules:
@@ -25,6 +26,8 @@ black:
 isort:
   image: python:3.10
   stage: test
+  before_script:
+    - pip install isort
   script:
     - isort --check-only hw/
   rules:
@@ -34,6 +37,8 @@ isort:
 flake8:
   image: python:3.10
   stage: test
+  before_script:
+    - pip install flake8
   script:
     - flake8 hw/
   rules:
@@ -43,6 +48,8 @@ flake8:
 unittest:
   image: python:3.10
   stage: test
+  before_script:
+    - pip install pytest flask flask-sqlalchemy
   script:
     - pytest hw/
   rules:
