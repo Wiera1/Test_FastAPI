@@ -1,39 +1,45 @@
-workflow:
-  rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-
-image: python:3.10
-
-
 stages:
-  - build
   - test
 
-
-before-script:
-    - pip install -r requirements.txt
-
-unittest:
-  stage: test
-  script:
-    - pytest hw
+before_script:
+  - pip install -r requirements.txt pytest mypy black>=24.0.0 isort flake8 flask flask-sqlalchemy
 
 mypy:
   stage: test
   script:
     - mypy hw/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
 
 black:
   stage: test
   script:
-    - black --diff --check hw/
+    - black --check --diff hw/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
 
 isort:
   stage: test
   script:
     - isort --check-only hw/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
 
-flask8:
+flake8:  # ← Исправлено flask8
   stage: test
   script:
     - flake8 hw/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+unittest:
+  stage: test
+  script:
+    - pytest hw/
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
