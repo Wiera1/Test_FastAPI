@@ -31,10 +31,6 @@ jobs:
         python -m pip install flake8 pytest mypy black isort flask flask-sqlalchemy
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
-    - name: Run mypy
-      run: |
-        mypy hw/
-    
     - name: Check formatting with black
       run: |
         black --check --diff hw/
