@@ -14,26 +14,31 @@ before-script:
     - pip install -r requirements.txt
 
 unittest:
+  image: python:3.10
   stage: test
   script:
-    - pytest hw
+    - pytest hw/
 
 mypy:
+  image: python:3.10
   stage: test
   script:
     - mypy hw/
 
 black:
+  image: python:3.10
   stage: test
   script:
     - black --diff --check hw/
 
 isort:
+  image: 3.10
   stage: test
   script:
     - isort --check-only hw/
 
 flask8:
+  image: 3.10
   stage: test
   script:
     - flake8 hw/
