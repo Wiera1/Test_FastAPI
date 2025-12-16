@@ -5,6 +5,7 @@ before_script:
   - pip install -r requirements.txt pytest mypy black>=24.0.0 isort flake8 flask flask-sqlalchemy
 
 mypy:
+  image: python:3.10
   stage: test
   script:
     - mypy hw/
@@ -13,6 +14,7 @@ mypy:
     - if: $CI_COMMIT_BRANCH == "main"
 
 black:
+  image: python:3.10
   stage: test
   script:
     - black --check --diff hw/
@@ -21,6 +23,7 @@ black:
     - if: $CI_COMMIT_BRANCH == "main"
 
 isort:
+  image: python:3.10
   stage: test
   script:
     - isort --check-only hw/
@@ -28,7 +31,8 @@ isort:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH == "main"
 
-flake8:  # ← Исправлено flask8
+flake8:
+  image: python:3.10
   stage: test
   script:
     - flake8 hw/
@@ -37,6 +41,7 @@ flake8:  # ← Исправлено flask8
     - if: $CI_COMMIT_BRANCH == "main"
 
 unittest:
+  image: python:3.10
   stage: test
   script:
     - pytest hw/
